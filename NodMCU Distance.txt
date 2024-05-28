@@ -1,0 +1,36 @@
+int trig=12;     // GPIO Pin D6
+int echo=14;     //GPIO Pin D5
+int time_microsec;
+int time_ms;
+int dist_cm;
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  pinMode(12,OUTPUT);
+  pinMode(14,INPUT);
+
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+digitalWrite(trig,LOW);
+delayMicroseconds(2);
+digitalWrite(trig,HIGH);
+delayMicroseconds(10);
+digitalWrite(trig,LOW);
+
+//pulseIn gives time in micro seconds, 1Sec= 1000000 microseconds
+time_microsec= pulseIn(echo,HIGH);
+time_ms=time_microsec/1000;
+
+dist_cm= (34*time_ms)/2;
+
+Serial.print("Time to travel: ");
+Serial.println(time_ms,1);
+Serial.print("ms / ");
+Serial.print("Distance: ");
+Serial.print(dist_cm,1);
+Serial.print("cm ");
+
+delay(2000);

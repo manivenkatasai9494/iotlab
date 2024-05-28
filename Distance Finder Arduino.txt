@@ -1,0 +1,28 @@
+int trig=12;
+int echo=11;
+float duration,dist_cm,dist_in;
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(trig,OUTPUT);
+  pinMode(echo,INPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+    // put your main code here, to run repeatedly:
+    digitalWrite(trig,LOW);
+    delayMicroseconds(2);
+    digitalWrite(trig,HIGH);
+    delayMicroseconds(10);
+    digitalWrite(trig,LOW);
+    
+    duration=pulseIn(echo,HIGH);
+    dist_cm=duration*0.0343/2.0;
+    dist_in=duration*0.0315/2.0;
+    Serial.print("Distance : ");
+    Serial.print(dist_cm);
+    Serial.print("cm/");
+    Serial.print(dist_in);
+    Serial.print("inches\n");
+    delay(300);
+}
